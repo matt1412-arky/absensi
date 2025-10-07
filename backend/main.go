@@ -39,10 +39,11 @@ type Schedule struct {
 
 func main() {
 	var err error
-	db, err = gorm.Open(sqlite.Open("attendance.db"), &gorm.Config{})
+	db, err = gorm.Open(sqlite.Open("./attendance.db"), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect db")
+		panic("failed to connect db: " + err.Error())
 	}
+
 	// migrations
 	db.AutoMigrate(&Student{}, &Attendance{}, &Schedule{})
 
